@@ -1,0 +1,42 @@
+appId: os.luna.moonclient
+productName: Moon Client
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**/*
+  - resources/**/*
+  - package.json
+asarUnpack:
+  - resources/**
+win:
+  executableName: moon-client
+  icon: resources/icon.png
+  target:
+    - target: nsis
+      arch: [x64]
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  shortcutName: ${productName}
+  createDesktopShortcut: always
+mac:
+  icon: resources/icon.png
+  category: public.app-category.games
+  target:
+    - target: dmg
+      arch: [x64, arm64]
+dmg:
+  artifactName: ${name}-${version}-${arch}.${ext}
+linux:
+  icon: resources/icon.png
+  category: Game
+  maintainer: Luna OS
+  target:
+    - AppImage
+    - deb
+appImage:
+  artifactName: ${name}-${version}.${ext}
+npmRebuild: false
+publish: null
