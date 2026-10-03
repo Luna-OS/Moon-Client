@@ -30,7 +30,8 @@
 ## Installation
 
 Fertige Installer (Windows `.exe`, macOS `.dmg`, Linux `.AppImage`/`.deb`) werden von GitHub Actions gebaut:
-**Actions → Build → letzter Lauf → Artifacts**. Für einen Tag `v*` (z. B. `v1.0.0`) wird automatisch ein Release erstellt.
+**Actions → Build → letzter Lauf → Artifacts**. Für einen Tag `v*` (z. B. `v1.0.0`) wird automatisch ein Release erstellt – alternativ unter
+**Actions → Build → Run workflow** eine Version eintragen.
 
 ## Selbst bauen
 

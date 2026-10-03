@@ -6,6 +6,11 @@ on:
     tags: ['v*']
   pull_request:
   workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release-Version (z. B. v1.0.0). Leer lassen für einen Build ohne Release.'
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -57,7 +62,7 @@ jobs:
 
   release:
     name: GitHub Release
-    if: startsWith(github.ref, 'refs/tags/v')
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && inputs.version != '')
     needs: package
     runs-on: ubuntu-latest
     permissions:
@@ -71,3 +76,7 @@ jobs:
         with:
           files: artifacts/*
           generate_release_notes: true
+          # Bei manuellem Start legt die Action den Tag auf dem gebauten Commit an.
+          tag_name: ${{ inputs.version || github.ref_name }}
+          name: Moon Client ${{ inputs.version || github.ref_name }}
+          target_commitish: ${{ github.sha }}
